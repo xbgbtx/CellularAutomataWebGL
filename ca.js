@@ -33,8 +33,11 @@ function init_pixi ()
 
     //let sprite = PIXI.Sprite.from ( texture );
     let sprite = PIXI.Sprite.from("test.png");
-
     pixi_app.stage.addChild ( sprite );
+
+    let shaderCode = "void main(){gl_FragColor = vec4(1.0,0,0,0);}";
+    let shader = new PIXI.Filter ( undefined, shaderCode, {} );
+    sprite.filters = [ shader ];
 
     pixi_app.ticker.add ( () =>
     {
