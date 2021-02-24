@@ -21,12 +21,16 @@ class CAPixi
         {
             width : w,
             height : h,
+            wrapMode : PIXI.WRAP_MODES.REPEAT,
+            mipmap : false,
         };
         
         let make_render_texture = () =>
         {
             let brt = new PIXI.BaseRenderTexture(tOpt)
-            return new PIXI.RenderTexture ( brt )
+            //brt.wrapMode = PIXI.WRAP_MODES.REPEAT;
+            let rt = new PIXI.RenderTexture ( brt )
+            return rt;
         }
         
         let t0 = make_render_texture ();
