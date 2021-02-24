@@ -1,69 +1,69 @@
-let pixi_app;
-let draw_sprite, display_sprite;
-let graphics;
-let uniforms = { };
-let draw_queue = [];
-
-function init_pixi ()
+class CAPixi
 {
-    let type="WebGL";
-
-    if ( !PIXI.utils.isWebGLSupported () )
+    constructor ()
     {
-        type = "canvas";
-    }
+        let type="WebGL";
 
-    PIXI.utils.sayHello ( type );
-
-    pixi_app = new PIXI.Application (
-    {
-        width  : w,
-        height : h
-    });
-
-    
-    let t0= new PIXI.RenderTexture ( 
-        new PIXI.BaseRenderTexture({width:w,height:h}));
-
-    let t1= new PIXI.RenderTexture ( 
-        new PIXI.BaseRenderTexture({width:w,height:h}));
-
-    draw_sprite = PIXI.Sprite.from ( t0 );
-    display_sprite = PIXI.Sprite.from ( t1 );
-
-    pixi_app.stage.addChild ( display_sprite );
-
-    graphics = new PIXI.Graphics ();
-    graphics.beginFill ( 0x00FFFF, 1 );
-    graphics.drawRect ( 100, 100, 100, 100 );
-    draw_queue.push ( graphics );
-
-    pixi_app.ticker.add ( () =>
-    {
-        for ( const d of draw_queue ) 
+        if ( !PIXI.utils.isWebGLSupported () )
         {
-            pixi_app.renderer.render ( d, draw_sprite.texture );
+            type = "canvas";
         }
 
-        draw_queue = [];
+        PIXI.utils.sayHello ( type );
 
-        pixi_app.renderer.render ( draw_sprite, display_sprite.texture );
+        this.pixi_app = new PIXI.Application (
+        {
+            width  : w,
+            height : h
+        });
 
-        //swap textures
-        let tmp = draw_sprite.texture;
-        draw_sprite.texture = display_sprite.texture;
-        display_sprite.texture = tmp;
-    });
+        
+        let t0= new PIXI.RenderTexture ( 
+            new PIXI.BaseRenderTexture({width:w,height:h}));
 
-    document.getElementById ( "canvas_div" ).appendChild ( pixi_app.view );
-    return pixi_app;
+        let t1= new PIXI.RenderTexture ( 
+            new PIXI.BaseRenderTexture({width:w,height:h}));
+
+        this.draw_sprite = PIXI.Sprite.from ( t0 );
+        this.display_sprite = PIXI.Sprite.from ( t1 );
+
+        this.pixi_app.stage.addChild ( this.display_sprite );
+
+        this.draw_queue = [];
+
+        //graphics = new PIXI.Graphics ();
+        //graphics.beginFill ( 0x00FFFF, 1 );
+        //graphics.drawRect ( 100, 100, 100, 100 );
+        //draw_queue.push ( graphics );
+
+        this.pixi_app.ticker.add ( () =>
+        {
+            //for ( const d of draw_queue ) 
+            //{
+            //    this.pixi_app.renderer.render ( d, draw_sprite.texture );
+            //}
+
+            //draw_queue = [];
+
+            this.pixi_app.renderer.render ( 
+                this.draw_sprite, this.display_sprite.texture );
+
+            //swap textures
+            let tmp = this.draw_sprite.texture;
+            this.draw_sprite.texture = this.display_sprite.texture;
+            this.display_sprite.texture = tmp;
+        });
+
+        document.getElementById ( "canvas_div" )
+            .appendChild ( this.pixi_app.view );
+    }
+
+
+    set_active_shader ( s )
+    {
+        let shaderCode = shaders.get( s );
+        let shader = new PIXI.Filter ( undefined, shaderCode, {} );
+        draw_sprite.filters = [ shader ];
+
+    }
 }
-
-
-function set_active_shader ( s )
-{
-    let shaderCode = shaders.get( s );
-    let shader = new PIXI.Filter ( undefined, shaderCode, uniforms );
-    draw_sprite.filters = [ shader ];
-}
-

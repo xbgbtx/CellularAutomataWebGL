@@ -18,8 +18,8 @@ async function page_loaded ()
         shaders.set ( s, text );
     }
 
-    init_pixi ();
+    let cp_pixi = new CAPixi ();
 
-    set_active_shader ( "scroll.frag" );
+    //set_active_shader ( "scroll.frag" );
 }
 
