@@ -1,8 +1,8 @@
 let pixi_app;
 let draw_sprite, display_sprite;
-let uniforms = {
-    //prev : undefined,
-};
+let graphics;
+let uniforms = { };
+let draw_queue = [];
 
 function init_pixi ()
 {
@@ -33,8 +33,20 @@ function init_pixi ()
 
     pixi_app.stage.addChild ( display_sprite );
 
+    graphics = new PIXI.Graphics ();
+    graphics.beginFill ( 0x00FFFF, 1 );
+    graphics.drawRect ( 100, 100, 100, 100 );
+    draw_queue.push ( graphics );
+
     pixi_app.ticker.add ( () =>
     {
+        for ( const d of draw_queue ) 
+        {
+            pixi_app.renderer.render ( d, draw_sprite.texture );
+        }
+
+        draw_queue = [];
+
         pixi_app.renderer.render ( draw_sprite, display_sprite.texture );
 
         //swap textures
