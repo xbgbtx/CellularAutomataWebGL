@@ -17,12 +17,20 @@ class CAPixi
             height : h
         });
 
+        let tOpt = 
+        {
+            width : w,
+            height : h,
+        };
         
-        let t0= new PIXI.RenderTexture ( 
-            new PIXI.BaseRenderTexture({width:w,height:h}));
-
-        let t1= new PIXI.RenderTexture ( 
-            new PIXI.BaseRenderTexture({width:w,height:h}));
+        let make_render_texture = () =>
+        {
+            let brt = new PIXI.BaseRenderTexture(tOpt)
+            return new PIXI.RenderTexture ( brt )
+        }
+        
+        let t0 = make_render_texture ();
+        let t1 = make_render_texture ();
 
         this.draw_sprite = PIXI.Sprite.from ( t0 );
         this.display_sprite = PIXI.Sprite.from ( t1 );
