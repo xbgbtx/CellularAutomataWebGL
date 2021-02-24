@@ -4,6 +4,7 @@ const h = 512;
 
 let shader_files = [ "scroll.frag" ]
 let shaders;
+let graphics;
 
 async function page_loaded () 
 {
@@ -20,6 +21,11 @@ async function page_loaded ()
 
     let cp_pixi = new CAPixi ();
 
-    //set_active_shader ( "scroll.frag" );
+    graphics = new PIXI.Graphics ();
+    graphics.beginFill ( 0x00FFFF, 1 );
+    graphics.drawRect ( 100, 100, 100, 100 );
+    cp_pixi.draw_queue.push ( graphics );
+
+    cp_pixi.set_active_shader ( shaders.get("scroll.frag") );
 }
 

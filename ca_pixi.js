@@ -31,19 +31,15 @@ class CAPixi
 
         this.draw_queue = [];
 
-        //graphics = new PIXI.Graphics ();
-        //graphics.beginFill ( 0x00FFFF, 1 );
-        //graphics.drawRect ( 100, 100, 100, 100 );
-        //draw_queue.push ( graphics );
 
         this.pixi_app.ticker.add ( () =>
         {
-            //for ( const d of draw_queue ) 
-            //{
-            //    this.pixi_app.renderer.render ( d, draw_sprite.texture );
-            //}
+            for ( const d of this.draw_queue ) 
+            {
+                this.pixi_app.renderer.render ( d,this. draw_sprite.texture );
+            }
 
-            //draw_queue = [];
+            this.draw_queue = [];
 
             this.pixi_app.renderer.render ( 
                 this.draw_sprite, this.display_sprite.texture );
@@ -59,11 +55,9 @@ class CAPixi
     }
 
 
-    set_active_shader ( s )
+    set_active_shader ( shaderCode )
     {
-        let shaderCode = shaders.get( s );
         let shader = new PIXI.Filter ( undefined, shaderCode, {} );
-        draw_sprite.filters = [ shader ];
-
+        this.draw_sprite.filters = [ shader ];
     }
 }
