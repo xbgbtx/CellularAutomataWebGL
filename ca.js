@@ -5,45 +5,24 @@ let pixi_app;
 
 let texture;
 
-function page_loaded () 
+let shader_files = [ "simple.frag" ]
+let shaders;
+
+async function page_loaded () 
 {
     console.log ( "Cellular Automata starting..." );
 
-    init_pixi ();
-}
+    shaders = new Map ();
 
-function init_pixi ()
-{
-    let type="WebGL";
-
-    if ( !PIXI.utils.isWebGLSupported () )
+    for ( const s of shader_files )
     {
-        type = "canvas";
+        const response = await fetch ( `shaders/${s}` );
+        const text = await response.text ();
+        shaders.set ( s, text );
     }
 
-    PIXI.utils.sayHello ( type );
+    console.log ( shaders.get ( "simple.frag" ) );
 
-    pixi_app = new PIXI.Application (
-    {
-        width  : w,
-        height : h
-    });
-
-    texture = PIXI.Texture.fromBuffer ( undefined, w, h );
-
-    //let sprite = PIXI.Sprite.from ( texture );
-    let sprite = PIXI.Sprite.from("test.png");
-    pixi_app.stage.addChild ( sprite );
-
-    let shaderCode = "void main(){gl_FragColor = vec4(1.0,0,0,0);}";
-    let shader = new PIXI.Filter ( undefined, shaderCode, {} );
-    sprite.filters = [ shader ];
-
-    pixi_app.ticker.add ( () =>
-    {
-    });
-
-    document.getElementById ( "canvas_div" ).appendChild ( pixi_app.view );
-    return pixi_app;
+    init_pixi ();
 }
 
