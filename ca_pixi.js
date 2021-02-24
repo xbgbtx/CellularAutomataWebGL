@@ -1,7 +1,7 @@
 let pixi_app;
 let draw_sprite, display_sprite;
 let uniforms = {
-    prev : undefined,
+    //prev : undefined,
 };
 
 function init_pixi ()
@@ -35,7 +35,6 @@ function init_pixi ()
 
     pixi_app.ticker.add ( () =>
     {
-        uniforms.prev = display_sprite.texture;
         pixi_app.renderer.render ( draw_sprite, display_sprite.texture );
 
         //swap textures
@@ -53,6 +52,6 @@ function set_active_shader ( s )
 {
     let shaderCode = shaders.get( s );
     let shader = new PIXI.Filter ( undefined, shaderCode, uniforms );
-    sprite.filters = [ shader ];
+    draw_sprite.filters = [ shader ];
 }
 
