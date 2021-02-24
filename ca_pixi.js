@@ -1,10 +1,9 @@
-let textures = [];
 let pixi_app;
 let sprite;
 let uniforms = {
-    curr : undefined,
     prev : undefined,
 };
+let curr_render_texture, next_render_texture;
 
 function init_pixi ()
 {
@@ -23,21 +22,19 @@ function init_pixi ()
         height : h
     });
 
-    textures = [ PIXI.Texture.from ( "test.png" ),
-                 PIXI.Texture.from ( "test.png" ) ];
-
     
-    sprite = PIXI.Sprite.from( PIXI.Texture.fromBuffer ( undefined, w, h ) );
+    curr_render_texture = new PIXI.RenderTexture ( 
+        new PIXI.BaseRenderTexture({width:w,height:h}));
+
+    next_render_texture = new PIXI.RenderTexture ( 
+        new PIXI.BaseRenderTexture({width:w,height:h}));
+
+    sprite = PIXI.Sprite.from("test.png");
+
     pixi_app.stage.addChild ( sprite );
 
     pixi_app.ticker.add ( () =>
     {
-        let t = textures.shift ();
-        textures.push ( t );
-
-        uniforms.curr = textures [ 0 ];
-        uniforms.prev = textures [ 1 ];
-
     });
 
     document.getElementById ( "canvas_div" ).appendChild ( pixi_app.view );

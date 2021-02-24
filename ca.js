@@ -2,7 +2,6 @@ const w = 512;
 const h = 512;
 
 
-
 let shader_files = [ "scroll.frag" ]
 let shaders;
 
@@ -21,6 +20,6 @@ async function page_loaded ()
 
     init_pixi ();
 
-    set_active_shader ( "scroll.frag" );
+    //set_active_shader ( "scroll.frag" );
 }
 
