@@ -1,3 +1,11 @@
+let textures = [];
+let pixi_app;
+let sprite;
+let uniforms = {
+    curr : undefined,
+    prev : undefined,
+};
+
 function init_pixi ()
 {
     let type="WebGL";
@@ -15,22 +23,32 @@ function init_pixi ()
         height : h
     });
 
-    texture = PIXI.Texture.fromBuffer ( undefined, w, h );
+    textures = [ PIXI.Texture.from ( "test.png" ),
+                 PIXI.Texture.from ( "test.png" ) ];
 
-    //let sprite = PIXI.Sprite.from ( texture );
-    let sprite = PIXI.Sprite.from("test.png");
+    
+    sprite = PIXI.Sprite.from( PIXI.Texture.fromBuffer ( undefined, w, h ) );
     pixi_app.stage.addChild ( sprite );
-
-    let shaderCode = shaders.get("simple.frag");
-    let shader = new PIXI.Filter ( undefined, shaderCode, {} );
-    sprite.filters = [ shader ];
 
     pixi_app.ticker.add ( () =>
     {
+        let t = textures.shift ();
+        textures.push ( t );
+
+        uniforms.curr = textures [ 0 ];
+        uniforms.prev = textures [ 1 ];
+
     });
 
     document.getElementById ( "canvas_div" ).appendChild ( pixi_app.view );
     return pixi_app;
 }
 
+
+function set_active_shader ( s )
+{
+    let shaderCode = shaders.get( s );
+    let shader = new PIXI.Filter ( undefined, shaderCode, uniforms );
+    sprite.filters = [ shader ];
+}
 
