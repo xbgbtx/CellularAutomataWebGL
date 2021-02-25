@@ -29,7 +29,7 @@ class CAPixi
         this.pixi_app = new PIXI.Application (
         {
             width  : w,
-            height : h
+            height : h,
         });
     }
 
@@ -71,7 +71,8 @@ class CAPixi
 
         for ( const d of this.draw_queue ) 
         {
-            this.pixi_app.renderer.render ( d, this.draw_sprite.texture );
+            this.pixi_app.renderer.render ( d, 
+                this.draw_sprite.texture, false );
         }
 
         this.draw_queue = [];

@@ -6,6 +6,7 @@ let shader_files = [ "rps.frag", "scroll.frag" ]
 let shaders;
 let graphics;
 let ca_pixi;
+let pen_color = 0xFF0000;
 
 async function page_loaded () 
 {
@@ -53,13 +54,30 @@ function randomize_button_click ()
 
 function canvas_mouse ( mouse )
 {
+    let r_i = ( n ) =>  Math.floor ( Math.random () * n );
+    let r_col = () => [ 0x00FF00, 0xFF0000, 0x0000FF ] [ r_i (3) ];
+
     let grid_x = Math.floor ( mouse.global.x );
     let grid_y = Math.floor ( mouse.global.y );
 
     graphics
         .clear ()
-        .beginFill ( 0x00FF00, 1 )
+        //.beginFill ( r_col(), 1 )
+        .beginFill ( pen_color, 1 )
         .drawCircle ( grid_x, grid_y, 10 );
 
     ca_pixi.draw_queue.push ( graphics );
+}
+
+function pen_select ()
+{
+    let el = document.getElementById ( "pen_select" );
+
+    switch ( el.value )
+    {
+        case "red" : pen_color = 0xFF0000;break;
+        case "blue" : pen_color = 0x0000FF;break;
+        case "green" : pen_color = 0x00FF00;break;
+        case "black" : pen_color = 0x000000;break;
+    }
 }
