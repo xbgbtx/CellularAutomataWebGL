@@ -5,6 +5,7 @@ const h = 512;
 let shader_files = [ "rps.frag", "scroll.frag" ]
 let shaders;
 let graphics;
+let ca_pixi;
 
 async function page_loaded () 
 {
@@ -19,25 +20,46 @@ async function page_loaded ()
         shaders.set ( s, text );
     }
 
-    let cp_pixi = new CAPixi ();
+    ca_pixi = new CAPixi ();
 
     graphics = new PIXI.Graphics ();
-    graphics
-        .beginFill ( 0x00FF00, 1 )
-        .drawRect ( 0, 0, w, h )
-        .beginFill ( 0xFF0000, 1 )
-        .drawRect ( 200, 200, 100, 200 )
-        .beginFill ( 0x0000FF, 1 )
-        .drawRect ( 250, 250, 80, 160 )
-        .beginFill ( 0x00FF00, 1 )
-        .drawRect ( 210, 210, 80, 80 )
-        .beginFill ( 0x0000FF, 1 )
-        .drawRect ( 240, 240, 40, 40 )
-        .drawCircle ( 10, 10, 100 )
-        .drawCircle ( 150, 10, 100 );
 
-    cp_pixi.draw_queue.push ( graphics );
-
-    cp_pixi.set_active_shader ( shaders.get("rps.frag") );
+    ca_pixi.set_active_shader ( shaders.get("rps.frag") );
 }
 
+function randomize_button_click ()
+{
+    let r_i = ( n ) =>  Math.floor ( Math.random () * n );
+    let r_col = () => [ 0x00FF00, 0xFF0000, 0x0000FF ] [ r_i (3) ];
+
+    graphics.clear ();
+
+    graphics
+        .beginFill ( 0x00FF00, 1 )
+        .drawRect ( 0, 0, w, h );
+
+    let n = r_i(50)+1;
+    for ( let i=0; i<n; i++ )
+    {
+        let s = w/4;
+        graphics
+            .beginFill ( r_col(), 1 )
+            .drawRect ( r_i(s), r_i(s), r_i(s), r_i(s) )
+            .drawCircle ( r_i(s), r_i(s), r_i(s) );
+    }
+
+    ca_pixi.draw_queue.push ( graphics );
+}
+
+function canvas_mouse ( mouse )
+{
+    let grid_x = Math.floor ( mouse.global.x );
+    let grid_y = Math.floor ( mouse.global.y );
+
+    graphics
+        .clear ()
+        .beginFill ( 0x00FF00, 1 )
+        .drawCircle ( grid_x, grid_y, 10 );
+
+    ca_pixi.draw_queue.push ( graphics );
+}

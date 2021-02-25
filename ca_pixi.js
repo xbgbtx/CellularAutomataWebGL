@@ -67,6 +67,8 @@ class CAPixi
 
     update ()
     {
+        this.poll_mouse ( this.pixi_app.renderer.plugins.interaction.mouse );
+
         for ( const d of this.draw_queue ) 
         {
             this.pixi_app.renderer.render ( d, this.draw_sprite.texture );
@@ -82,4 +84,17 @@ class CAPixi
         this.draw_sprite.texture = this.display_sprite.texture;
         this.display_sprite.texture = tmp;
     }
+
+    poll_mouse ( mouse )
+    {
+        //exit it mouse main button not down
+        if ( mouse.pointerType == "mouse" &&  mouse.buttons != 1 )
+        {
+            return;
+        }
+
+        canvas_mouse ( mouse );
+
+    }
+
 }
