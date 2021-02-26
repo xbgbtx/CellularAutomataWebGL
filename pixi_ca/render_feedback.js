@@ -42,10 +42,6 @@ class RenderFeedback
 
         renderer.render ( this.s0, this.s1.texture );
 
-        //swap textures
-        let tmp = this.s0.texture;
-        this.s0.texture = this.s1.texture;
-        this.s1.texture = tmp;
     }
 
     get_input_sprite ()
@@ -56,6 +52,14 @@ class RenderFeedback
     get_output_sprite ()
     {
         return this.s1;
+    }
+
+    flip ()
+    {
+        //swap textures
+        let tmp = this.s0.texture;
+        this.s0.texture = this.s1.texture;
+        this.s1.texture = tmp;
     }
 }
 

@@ -37,7 +37,7 @@ class CAPixi
     }
     
 
-    set_active_shader ( sprite, shaderCode )
+    set_active_shader ( shaderCode )
     {
         let shader = new PIXI.Filter ( undefined, shaderCode, {} );
         let s = this.sim.get_input_sprite ();
@@ -56,6 +56,7 @@ class CAPixi
             this.sim.get_output_sprite (), 
             this.display_sprite.texture );
 
+        this.sim.flip ();
     }
 
     poll_mouse ( mouse )
