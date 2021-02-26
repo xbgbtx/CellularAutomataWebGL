@@ -6,6 +6,7 @@ class CAPixi
         this.create_display_sprite ( width, height );
         this.create_sim ( width, height )
 
+        //TODO: create input buffer sprite with RGBA -> State
         this.input_queue = [];
 
         this.pixi_app.ticker.add ( () => this.update () );

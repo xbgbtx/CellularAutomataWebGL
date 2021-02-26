@@ -2,7 +2,7 @@ const w = 512;
 const h = 512;
 
 
-let shader_files = [ "rps.frag", "scroll.frag" ]
+let shader_files = [ "rps.frag", "header.frag" ]
 let shaders;
 let graphics;
 let ca_pixi;
@@ -25,7 +25,8 @@ async function page_loaded ()
 
     graphics = new PIXI.Graphics ();
 
-    ca_pixi.set_sim_shader ( shaders.get("rps.frag") );
+    ca_pixi.set_sim_shader ( 
+        shaders.get("header.frag") + shaders.get("rps.frag") );
 
 }
 
