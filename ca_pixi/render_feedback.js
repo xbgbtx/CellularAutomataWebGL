@@ -41,7 +41,7 @@ class RenderFeedback
 
     get_input_texture ()
     {
-        return this.t0;
+        return this.s0.texture;
     }
 
     get_input_sprite ()

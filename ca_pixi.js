@@ -67,8 +67,6 @@ class CAPixi
         this.sim.update ( renderer );
         this.sim.render ( this.display_sprite.texture, renderer );
 
-        renderer.render ( this.sim.get_output_sprite (), 
-                          this.display_sprite.texture );
     }
 
     poll_mouse ( mouse )
@@ -79,8 +77,13 @@ class CAPixi
             return;
         }
 
-        canvas_mouse ( mouse );
-
+        if ( mouse.global.x >= 0 && 
+             mouse.global.x < this.pixi_app.renderer.width &&
+             mouse.global.y >= 0 &&
+             mouse.global.y < this.pixi_app.renderer.height )
+        {
+            canvas_mouse ( mouse );
+        }
     }
 
 }
