@@ -6,7 +6,6 @@ class RenderFeedback
     {
         this.create_textures ( width, height );
         this.create_sprites ( width, height );
-        this.input_queue = [];
     }
 
     create_textures ( width, height )
@@ -35,13 +34,14 @@ class RenderFeedback
 
     update ( renderer )
     {
-        for ( const i of this.input_queue )
-            renderer.render ( i, this.s0.texture, false );
-
-        this.input_queue = [];
-
         renderer.render ( this.s0, this.s1.texture );
 
+        this.flip ();
+    }
+
+    get_input_texture ()
+    {
+        return this.t0;
     }
 
     get_input_sprite ()
@@ -54,9 +54,9 @@ class RenderFeedback
         return this.s1;
     }
 
+    //swap buffers
     flip ()
     {
-        //swap textures
         let tmp = this.s0.texture;
         this.s0.texture = this.s1.texture;
         this.s1.texture = tmp;
