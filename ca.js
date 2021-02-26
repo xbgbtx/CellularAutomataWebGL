@@ -21,11 +21,12 @@ async function page_loaded ()
         shaders.set ( s, text );
     }
 
-    ca_pixi = new CAPixi ();
+    ca_pixi = new CAPixi ( 512, 512 );
 
     graphics = new PIXI.Graphics ();
 
     ca_pixi.set_active_shader ( shaders.get("rps.frag") );
+
 }
 
 function randomize_button_click ()
@@ -49,7 +50,7 @@ function randomize_button_click ()
             .drawCircle ( r_i(s), r_i(s), r_i(s) );
     }
 
-    ca_pixi.draw_queue.push ( graphics );
+    ca_pixi.sim.input_queue.push ( graphics );
 }
 
 function canvas_mouse ( mouse )
@@ -66,7 +67,7 @@ function canvas_mouse ( mouse )
         .beginFill ( pen_color, 1 )
         .drawCircle ( grid_x, grid_y, 10 );
 
-    ca_pixi.draw_queue.push ( graphics );
+    ca_pixi.sim.input_queue.push ( graphics );
 }
 
 function pen_select ()

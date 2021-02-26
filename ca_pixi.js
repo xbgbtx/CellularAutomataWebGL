@@ -1,13 +1,11 @@
 class CAPixi
 {
-    constructor ()
+    constructor ( width, height )
     {
-        this.create_pixi_app ();
-        this.create_sprites ();
+        this.create_pixi_app ( width, height );
+        this.create_display_sprite ( width, height );
 
-        this.pixi_app.stage.addChild ( this.display_sprite );
-
-        this.draw_queue = [];
+        this.sim = new RenderFeedback ( width, height );
 
         this.pixi_app.ticker.add ( () => this.update () );
 
@@ -15,7 +13,7 @@ class CAPixi
             .appendChild ( this.pixi_app.view );
     }
 
-    create_pixi_app () 
+    create_pixi_app ( width, height ) 
     {
         let type="WebGL";
 
@@ -26,64 +24,38 @@ class CAPixi
 
         PIXI.utils.sayHello ( type );
 
-        this.pixi_app = new PIXI.Application (
-        {
-            width  : w,
-            height : h,
-        });
+        this.pixi_app = new PIXI.Application ( { width, height });
     }
 
-    create_sprites ()
+    create_display_sprite ( width, height )
     {
-        let make_render_texture = () =>
-        {
-            let tOpt = 
-            {
-                width : w,
-                height : h,
-                wrapMode : PIXI.WRAP_MODES.REPEAT,
-                mipmap : false,
-            };
+        let brt = new PIXI.BaseRenderTexture({ width, height });
+        let rt = new PIXI.RenderTexture ( brt )
 
-            let brt = new PIXI.BaseRenderTexture(tOpt)
-            let rt = new PIXI.RenderTexture ( brt )
-            return rt;
-        }
-        
-        let t0 = make_render_texture ();
-        let t1 = make_render_texture ();
-
-        //draw sprite is blitted onto display sprite and then textures
-        //are swapped
-        this.draw_sprite = PIXI.Sprite.from ( t0 );
-        this.display_sprite = PIXI.Sprite.from ( t1 );
+        this.display_sprite = PIXI.Sprite.from ( rt );
+        this.pixi_app.stage.addChild ( this.display_sprite );
     }
+    
 
-    set_active_shader ( shaderCode )
+    set_active_shader ( sprite, shaderCode )
     {
         let shader = new PIXI.Filter ( undefined, shaderCode, {} );
-        this.draw_sprite.filters = [ shader ];
+        let s = this.sim.get_input_sprite ();
+        s.filters = [ shader ];
     }
 
     update ()
     {
         this.poll_mouse ( this.pixi_app.renderer.plugins.interaction.mouse );
 
-        for ( const d of this.draw_queue ) 
-        {
-            this.pixi_app.renderer.render ( d, 
-                this.draw_sprite.texture, false );
-        }
-
-        this.draw_queue = [];
+        this.sim.update ( this.pixi_app.renderer );
+        this.sim.render ( this.display_sprite.texture,
+                          this.pixi_app.renderer );
 
         this.pixi_app.renderer.render ( 
-            this.draw_sprite, this.display_sprite.texture );
+            this.sim.get_output_sprite (), 
+            this.display_sprite.texture );
 
-        //swap textures
-        let tmp = this.draw_sprite.texture;
-        this.draw_sprite.texture = this.display_sprite.texture;
-        this.display_sprite.texture = tmp;
     }
 
     poll_mouse ( mouse )
