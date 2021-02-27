@@ -1,11 +1,11 @@
 !include pixi_header.frag
-!include state_conversion.frag
 
 
 
 void main()
 {
-   vec4 c0 = texture2D ( uSampler, vTextureCoord );
+   vec4 c0 = texture ( uSampler, vTextureCoord );
 
-   gl_FragColor = color_to_sVec ( c0 );
+   //gl_FragColor = color_to_sVec ( c0 );
+   vColor = c0;
 }

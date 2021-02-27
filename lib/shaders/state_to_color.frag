@@ -3,7 +3,7 @@
 
 void main()
 {
-   vec4 c0 = texture2D ( uSampler, vTextureCoord );
+   vec4 c0 = texture ( uSampler, vTextureCoord );
 
-   gl_FragColor = sVec_to_color ( c0 );
+   vColor = sVec_to_color ( c0 );
 }
