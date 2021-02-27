@@ -6,5 +6,6 @@ in vec2 vTextureCoord;
 
 uniform sampler2D uSampler;
 
-out vec4 vColor;
+out vec4 fragColor;
+
 
