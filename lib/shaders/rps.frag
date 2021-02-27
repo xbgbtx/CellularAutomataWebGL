@@ -1,4 +1,5 @@
 !include pixi_header.frag
+
 void main()
 {
    vec4 c0 = texture2D ( uSampler, vTextureCoord );
