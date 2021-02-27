@@ -5,5 +5,5 @@ void main()
 {
    vec4 c0 = texture2D ( uSampler, vTextureCoord );
 
-   gl_FragColor = state_to_rgba ( c0 );
+   gl_FragColor = sVec_to_color ( c0 );
 }
