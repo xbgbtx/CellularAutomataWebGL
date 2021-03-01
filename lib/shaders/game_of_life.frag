@@ -8,8 +8,8 @@ void main()
 
    float px = 1.0/512.0;
 
-   int s = int(c0.r);
-   int count = -1 * s;
+   bool alive = int(c0.r) == 1;
+   int count = alive ? -1 : 0;
 
    for ( int i = -1; i <= 1; i++ )
    {
@@ -24,7 +24,7 @@ void main()
       }
    }
 
-   if ( ( s == 1 && count == 2 ) || count == 3 )
+   if ( ( alive && count == 2 ) || count == 3 )
    {
       gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
       return;
