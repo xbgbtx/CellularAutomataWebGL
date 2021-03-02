@@ -4,8 +4,6 @@
     <head>
         <meta charset="utf-8" />
 
-        <meta name="viewport" content="user-scalable=no"/>
-
         <meta name="HandheldFriendly" content="true" />
 
         <link rel="stylesheet" type="text/css" href="style.css" />
@@ -25,14 +23,16 @@
     <body onload="page_loaded()" >
 
         <main>
-           <div id="root_div">
-              <h1>Cellular Automata</h1>
+           <div id="root_div" class="center-contents">
+              <span id="top_bar" class="box center-contents">
+                 Cellular Automata
+              </span>
 
               <div id="app_div" class="flexrow" >
-                 <div id="canvas_div" class="row_item"></div>
+                 <div id="canvas_div" class="row_item box"></div>
 
                  <div id="control_div" class="row_item">
-                    <div id="control_div_content" class="flexcol" >
+                    <div id="control_div_content" class="flexcol box" >
                        <h2>Controls:</h2>
                        <label for="automata_select" class="control_item">
                           Select Automaton:
