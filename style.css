@@ -76,7 +76,14 @@ body
    margin-top :20px;
 }
 
-#control_div_content h2
+#about_div
+{
+   padding : 20px;
+   font-family : data-control;
+   min-width : 512px;
+   padding : 20px;
+}
+h2
 {
    font-size : 50px;
    margin : 5px;
@@ -88,6 +95,7 @@ body
 {
    background-color: #FFFFFF;
    border: 11px double #000000;
+   margin : 20px;
 }
 
 canvas
