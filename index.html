@@ -29,52 +29,54 @@
               <h1>Cellular Automata</h1>
 
               <div id="app_div" class="flexrow" >
-                 <div id="canvas_div"></div>
+                 <div id="canvas_div" class="row_item"></div>
 
-                 <div id="control_div" class="flexcol" >
+                 <div id="control_div" class="row_item">
+                    <div id="control_div_content" class="flexcol" >
+                       <h2>Controls:</h2>
+                       <label for="automata_select" class="control_item">
+                          Select Automaton:
+                       </label>
+                       <select name="automata_select" 
+                          id="automata_select" class="control_item"
+                          autocomplete="off"
+                          onchange="automata_select()"
+                          >
+                          <option value="game_of_life" 
+                              selected="selected">Conway's Game of Life</option>
+                          <option value="rps">Rock Paper Scissors</option>
+                          <option value="brians_brain">Brian's Brain</option>
+                       </select>
 
-                    <label for="automata_select" class="control_item">
-                       Select Automaton:
-                    </label>
-                    <select name="automata_select" 
-                       id="automata_select" class="control_item"
-                       autocomplete="off"
-                       onchange="automata_select()"
-                       >
-                       <option value="game_of_life" 
-                           selected="selected">Conway's Game of Life</option>
-                       <option value="rps">Rock Paper Scissors</option>
-                       <option value="brians_brain">Brian's Brain</option>
-                    </select>
+                       <label for="randomise" class="control_item">
+                          Randomise the Grid:
+                       </label>
+                       <button onclick="randomize_button_click()" 
+                               class="control_item" id="randomise">
+                          Randomise
+                       </button>
 
-                    <label for="randomise" class="control_item">
-                       Randomise the Grid:
-                    </label>
-                    <button onclick="randomize_button_click()" 
-                            class="control_item" id="randomise">
-                       Randomise
-                    </button>
+                       <label for="pen_select" class="control_item">
+                          Pen Mode:
+                       </label>
+                       <select name="pen_select" 
+                          id="pen_select" class="control_item"
+                          autocomplete="off"
+                          onchange="pen_select()"
+                          >
+                          <option value="red" selected="selected">red</option>
+                          <option value="green">green</option>
+                          <option value="blue">blue</option>
+                          <option value="black">black</option>
+                       </select>
 
-                    <label for="pen_select" class="control_item">
-                       Pen Mode:
-                    </label>
-                    <select name="pen_select" 
-                       id="pen_select" class="control_item"
-                       autocomplete="off"
-                       onchange="pen_select()"
-                       >
-                       <option value="red" selected="selected">red</option>
-                       <option value="green">green</option>
-                       <option value="blue">blue</option>
-                       <option value="black">black</option>
-                    </select>
-
-                    <label for="pen_size_slider" class="control_item" >
-                       Pen Size:
-                    </label>
-                    <input type="range" min="1" max="300" value="10" step="1"
-                        class="control_item" autocomplete="off"
-                        id="pen_size_slider" onchange="pen_size_slider_move()" />
+                       <label for="pen_size_slider" class="control_item" >
+                          Pen Size:
+                       </label>
+                       <input type="range" min="1" max="300" value="10" step="1"
+                           class="control_item" autocomplete="off"
+                           id="pen_size_slider" onchange="pen_size_slider_move()" />
+                    </div>
                  </div>
               </div> 
 

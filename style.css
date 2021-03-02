@@ -1,9 +1,19 @@
+body
+{
+   background-image : url("bg.png");
+   background-repeat : repeat;
+}
 .flexrow
 {
    display : flex;
-   flex-direction : row;
-   background-color: DodgerBlue;
+   flex-wrap : wrap;
    justify-content : center;
+}
+
+.rowitem
+{
+   flex : 1 1 512px;
+   margin 20px;
 }
 
 .flexcol
@@ -16,10 +26,20 @@
 
 .control_item
 {
-   margin : 0px 20px;
 }
 
 #control_div
 {
    min-width : 512px;
+   padding : 20px;
+}
+
+#control_div_content
+{
+   padding : 20px;
+}
+
+label
+{
+   margin-top :20px;
 }
