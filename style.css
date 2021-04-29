@@ -62,4 +62,5 @@ html, body, main, .max_size
 {
    grid-column: 2 / span 3;
    grid-row: 1 / span 3;
+   background: #ccc;
 }
