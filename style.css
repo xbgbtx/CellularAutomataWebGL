@@ -35,7 +35,7 @@ html, body, main, .max_size
    z-index: 110;
 }
 
-#side_bar
+#ui_overlay
 {
    position: absolute;
    z-index: 120;
@@ -44,17 +44,22 @@ html, body, main, .max_size
    display: grid;
    grid-gap: 8px;
    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-   grid-template-rows: repeat(auto-fill, minmax(80px, 1fr));
 }
 
-.side_bar_control
+.grid_item
+{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.ui_option
 {
    grid-column: 1 / 2;
 }
 
-.side_bar_menu
+#ui_menu
 {
    grid-column: 2 / span 3;
    grid-row: 1 / span 3;
-   background: #ccc;
 }
