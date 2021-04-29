@@ -26,20 +26,28 @@
            <div id="root_div" class="max_size">
 
               <div id="ui_overlay">
-                 <div class="grid_item ui_option" >
-                    <button onclick="ui_option_click('play')">Play</button>
-                  </div>
-                 <div class="grid_item ui_option" >
-                    <button onclick="ui_option_click('rule')">Rule</button>
-                  </div>
-                 <div class="grid_item ui_option" >
-                    <button onclick="ui_option_click('pen')">Pen</button>
-                  </div>
-                 <div class="grid_item ui_option" >
-                    <button onclick="ui_option_click('randomize')">Randomize</button>
-                  </div>
+                 <div id="ui_buttons" >
+                    <div id="ui_buttons_grid">
+                       <div class="buttons_grid_item ui_option" >
+                          <button onclick="ui_option_click('play')">Play</button>
+                        </div>
+                       <div class="buttons_grid_item ui_option" >
+                          <button onclick="ui_option_click('rule')">Rule</button>
+                        </div>
+                       <div class="buttons_grid_item ui_option" >
+                          <button onclick="ui_option_click('pen')">Pen</button>
+                        </div>
+                       <div class="buttons_grid_item ui_option" >
+                          <button onclick="ui_option_click('randomize')">Randomize</button>
+                        </div>
+                    </div>
+                 </div>
                   
                   <div id="ui_menu" >
+                     <div id="ui_menu_header">
+                        <button onclick="hide_ui_menu()">Close</button>
+                     </div>
+                     <div id="ui_menu_content"></div>
                   </div>
               </div>
               <div id="canvas_div" class="max_size"></div>

@@ -40,13 +40,24 @@ html, body, main, .max_size
    position: absolute;
    z-index: 120;
    min-width: 50px;
-
    display: grid;
-   grid-gap: 8px;
-   grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+   grid-template-columns: auto auto;
 }
 
-.grid_item
+#ui_buttons
+{
+   grid-column: 1 / 2;
+}
+
+#ui_buttons_grid
+{
+   display: grid;
+   grid-gap: 8px;
+   grid-template-columns: auto;
+   grid-template-rows: repeat ( auto-fill, auto );
+}
+
+.buttons_grid_item
 {
    display: flex;
    align-items: center;
@@ -60,7 +71,6 @@ html, body, main, .max_size
 
 #ui_menu
 {
-   grid-column: 2 / span 3;
-   grid-row: 1 / span 3;
    background: #ccc;
+   grid-column: 2 / 3;
 }
