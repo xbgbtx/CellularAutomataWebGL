@@ -28,29 +28,60 @@
               <div id="ui_overlay">
                  <div id="ui_buttons" >
                     <div id="ui_buttons_grid">
-                       <div class="buttons_grid_item ui_option" >
-                          <button onclick="ui_option_click('play')">Play</button>
+                       <div class="buttons_grid_item" >
+                          <button class="icon_button" type="button"
+                             onclick="ui_option_click('play')">
+                           <img src="media/icons/pause.svg" 
+                              aria-hidden="true" 
+                              focusable="false" alt="Pause" />
+                           <span class="visually-hidden">Pause</span>
+                          </button>
                         </div>
-                       <div class="buttons_grid_item ui_option" >
-                          <button onclick="ui_option_click('rule')">Rule</button>
+                       <div class="buttons_grid_item" >
+                          <button class="icon_button"
+                             onclick="ui_option_click('rule')">
+                           <img src="media/icons/menu.svg" 
+                              aria-hidden="true" 
+                              focusable="false" alt="Rule" />
+                           <span class="visually-hidden">Rule</span>
+                          </button>
                         </div>
-                       <div class="buttons_grid_item ui_option" >
-                          <button onclick="ui_option_click('pen')">Pen</button>
+                       <div class="buttons_grid_item" >
+                          <button class="icon_button"
+                             onclick="ui_option_click('pen')">
+                           <img src="media/icons/edit-3.svg" 
+                              aria-hidden="true" 
+                              focusable="false" alt="Pen" />
+                           <span class="visually-hidden">Pen</span>
+                          </button>
                         </div>
-                       <div class="buttons_grid_item ui_option" >
-                          <button onclick="ui_option_click('randomize')">Randomize</button>
+                       <div class="buttons_grid_item" >
+                          <button class="icon_button"
+                             onclick="ui_option_click('randomize')">
+                           <img src="media/icons/rotate-ccw.svg" 
+                              aria-hidden="true" 
+                              focusable="false" alt="Randomize" />
+                           <span class="visually-hidden">Randomize</span>
+                          </button>
                         </div>
                     </div>
                  </div>
                   
                   <div id="ui_menu" >
                      <div id="ui_menu_header">
-                        <button onclick="hide_ui_menu()">Close</button>
+                        <span id="ui_menu_title"></span>
+                        <button onclick="hide_ui_menu()" class="icon_button">
+                           <img src="media/icons/x.svg" />
+                        </button>
                      </div>
                      <div id="ui_menu_content"></div>
                   </div>
               </div>
-              <div id="canvas_div" class="max_size"></div>
+              <div id="canvas_div" class="max_size" >
+                 <canvas id="pixi_canvas" title="Cellular Automata Simulation"
+                   role="img" aria-label="Cellular Automata Simulation" />
+                 
+              </div>
 
            </div>
         </main>
