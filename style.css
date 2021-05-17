@@ -53,6 +53,7 @@ html, body, main, .max_size
 .icon_button
 {
    padding: 0px;
+   margin: 3px;
 }
 
 #ui_buttons_grid
@@ -75,17 +76,37 @@ html, body, main, .max_size
 {
    background: #ccc;
    grid-column: 2 / 3;
+   font-family: arial;
 }
 
 #ui_menu_header
 {
    background: #7766cc;
+   color: #F0EEEE;
+   display: flex;
+   align-items: center;
+   justify-content: flex-end;
+   font-size: 2em;
+   font-weight: bold;
+   font-family: data-control;
+}
+
+#ui_menu_header span
+{
+   margin-left: auto;
+   margin-right: auto;
+}
+
+#ui_menu_content
+{
+   padding : 5px;
 }
 
 /* 
- *  * Utility class to hide content visually while keeping it screen reader-accessible.
- *   * Source: https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html 
- *    */
+ *  Utility class to hide content visually while keeping it 
+ *  screen reader-accessible.  Used for button alt text.
+ *  Source: https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html 
+ */
 
 .visually-hidden:not(:focus):not(:active) {
    clip: rect(0 0 0 0); 
