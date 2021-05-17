@@ -23,82 +23,106 @@
     <body onload="page_loaded()" >
 
         <main>
-           <div id="root_div" class="center-contents">
-              <span id="top_bar" class="box center-contents">
-                 Cellular Automata
-              </span>
+           <div id="root_div" class="max_size">
 
-              <div id="app_div" class="flexrow" >
-                 <div id="canvas_div" class="row_item box"></div>
-
-                 <div id="control_div" class="row_item">
-                    <div id="control_div_content" class="flexcol box" >
-                       <h2>Controls:</h2>
-                       <label for="automata_select" class="control_item">
-                          Select Automaton:
-                       </label>
-                       <select name="automata_select" 
-                          id="automata_select" class="control_item"
-                          autocomplete="off"
-                          onchange="automata_select()"
-                          >
-                          <option value="game_of_life" 
-                              selected="selected">Conway's Game of Life</option>
-                          <option value="rps">Rock Paper Scissors</option>
-                          <option value="brians_brain">Brian's Brain</option>
-                       </select>
-
-                       <label for="randomise" class="control_item">
-                          Randomise the Grid:
-                       </label>
-                       <button onclick="randomize_button_click()" 
-                               class="control_item" id="randomise">
-                          Randomise
-                       </button>
-
-                       <label for="pen_select" class="control_item">
-                          Pen Mode:
-                       </label>
-                       <select name="pen_select" 
-                          id="pen_select" class="control_item"
-                          autocomplete="off"
-                          onchange="pen_select()"
-                          >
-                          <option value="red" selected="selected">red</option>
-                          <option value="green">green</option>
-                          <option value="blue">blue</option>
-                          <option value="black">black</option>
-                       </select>
-
-                       <label for="pen_size_slider" class="control_item" >
-                          Pen Size:
-                       </label>
-                       <input type="range" min="1" max="300" value="10" step="1"
-                           class="control_item" autocomplete="off"
-                           id="pen_size_slider" onchange="pen_size_slider_move()" />
+              <div id="ui_overlay">
+                 <div id="ui_buttons" >
+                    <div id="ui_buttons_grid">
+                       <div class="buttons_grid_item" >
+                          <button class="icon_button" type="button"
+                             onclick="ui_option_click('play')">
+                           <img src="media/icons/pause.svg" 
+                              aria-hidden="true" 
+                              focusable="false" alt="Pause" />
+                           <span class="visually-hidden">Pause</span>
+                          </button>
+                        </div>
+                       <div class="buttons_grid_item" >
+                          <button class="icon_button"
+                             onclick="ui_option_click('automaton')">
+                           <img src="media/icons/menu.svg" 
+                              aria-hidden="true" 
+                              focusable="false" alt="Automaton" />
+                           <span class="visually-hidden">Automaton</span>
+                          </button>
+                        </div>
+                       <div class="buttons_grid_item" >
+                          <button class="icon_button"
+                             onclick="ui_option_click('pen')">
+                           <img src="media/icons/edit-3.svg" 
+                              aria-hidden="true" 
+                              focusable="false" alt="Pen" />
+                           <span class="visually-hidden">Pen</span>
+                          </button>
+                        </div>
+                       <div class="buttons_grid_item" >
+                          <button class="icon_button"
+                             onclick="ui_option_click('randomize')">
+                           <img src="media/icons/rotate-ccw.svg" 
+                              aria-hidden="true" 
+                              focusable="false" alt="Randomize" />
+                           <span class="visually-hidden">Randomize</span>
+                          </button>
+                        </div>
                     </div>
                  </div>
-                 <div id="about_div" class="row_item box">
-                    <h2>About:</h2>
-                    <p>
-                       Cellular Automata are simulations that run on a grid.  During
-                       each step of the simulation a cell will look at its neighbours
-                       and decide what it should do based on their state.  Simple
-                       rules can lead to complex behaviours.
-                    </p>
-                    <h3>More Info:</h3>
-                    <a href="https://en.wikipedia.org/wiki/Cellular_automaton">
-                       Wikipedia - Cellular Automaton</a><br>
-                    <a href="https://www.youtube.com/watch?v=lyZUzakG3bE">
-                       YouTube - Rudy Rucker Documentary</a>
-                    <h3>Source Code:</h3>
-                    <a href="https://github.com/xbgbtx/CellularAutomataWebGL">
-                       Full source code available on github</a>
-                 </div>
-              </div> 
+                  
+                  <div id="ui_menu" >
+                     <div id="ui_menu_header">
+                        <span id="ui_menu_title"></span>
+                        <button onclick="hide_ui_menu()" class="icon_button">
+                           <img src="media/icons/x.svg" />
+                        </button>
+                     </div>
+                     <div id="ui_menu_content"></div>
+                  </div>
+              </div>
+              <div id="canvas_div" class="max_size" >
+                 <canvas id="pixi_canvas" title="Cellular Automata Simulation"
+                   role="img" aria-label="Cellular Automata Simulation" />
+                 
+              </div>
 
            </div>
         </main>
+
+        <template id="pen_menu_template">
+           <form>
+              <fieldset>
+                 <legend>Pen Settings</legend>
+                 <label for="pen_mode_select">Pen Mode:</label>
+                 <select name="pen_mode_select" id="pen_mode_select">
+                 </select>
+                 <label for="pen_size">Pen Size:</label>
+                 <input type="range" min="1" max="100" id="pen_size">
+              </fieldset>
+           </form>
+        </template>
+
+        <template id="automaton_menu_template">
+           <form>
+              <fieldset>
+                 <legend>Select Automaton:</legend>
+                 <label for="automaton_select">Select Automaton Rule:</label>
+                 <select name="automaton_select" id="automaton_select">
+                 </select>
+              </fieldset>
+              <fieldset>
+                 <legend>Simulation Size:</legend>
+                 <label for="sim_width">Width:</label>
+                 <input type="number" id="sim_width" name="sim_width"
+                        min="64" max="1024" >
+                 <label for="sim_height">Height:</label>
+                 <input type="number" id="sim_height" name="sim_height"
+                        min="64" max="1024">
+              </fieldset>
+
+              <button type="button" onclick="submit_automaton_menu ()" >
+                  Apply
+              </button>
+
+           </form>
+        </template>
 
     </body>
 
