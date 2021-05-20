@@ -103,6 +103,7 @@ html, body, main, .max_size
    max-width: 50vw;
    max-height: 80vh;
    overflow: scroll;
+   overflow-x: hidden;
 }
 
 .int_set_container
