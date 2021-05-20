@@ -109,6 +109,9 @@ html, body, main, .max_size
 {
    display : flex;
    flex-wrap : wrap;
+   max-height: 20vh;
+   overflow: scroll;
+   overflow-x: hidden;
 }
 
 .checkbox
@@ -121,11 +124,6 @@ html, body, main, .max_size
    display: inline-flex;
    cursor: pointer;
    position: relative;
-}
-
-.checkbox > span {
-   color: #34495E;
-   padding: 0.5rem 0.25rem;
 }
 
 .checkbox > input {
