@@ -6,12 +6,6 @@ body
 
 @font-face
 {
-   font-family : xgrid;
-   src: url("media/xgrid/xgrid.ttf");
-}
-
-@font-face
-{
    font-family : data-control;
    src: url("media/data_control/data-latin.ttf");
 }
