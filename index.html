@@ -18,6 +18,7 @@
         <script type="text/javascript" src="lib/ca_dom.js" ></script>
         <script type="text/javascript" src="lib/automata.js" ></script>
         <script type="text/javascript" src="lib/shader_manager.js" ></script>
+        <script type="text/javascript" src="lib/music.js" ></script>
         <script type="text/javascript" src="lib/ca_pixi.js" ></script>
         <script type="text/javascript" src="lib/ca_pixi/render_feedback.js" ></script>
 
@@ -49,6 +50,15 @@
                               aria-hidden="true" 
                               focusable="false" alt="Pen" />
                            <span class="visually-hidden">Pen</span>
+                          </button>
+                        </div>
+                       <div class="buttons_grid_item" >
+                          <button class="icon_button"
+                             onclick="ui_option_click('music')">
+                           <img src="media/icons/music.svg" 
+                              aria-hidden="true" 
+                              focusable="false" alt="Randomize" />
+                           <span class="visually-hidden">Music</span>
                           </button>
                         </div>
                        <div class="buttons_grid_item" >
@@ -93,6 +103,19 @@
                     <label for="pen_size">Pen Size:</label>
                     <input type="range" min="1" max="100" id="pen_size">
                   </div>
+              </fieldset>
+           </form>
+        </template>
+
+        <template id="music_menu_template">
+           <form>
+              <fieldset>
+                 <legend>Pen Settings</legend>
+                 <label for="mic_enable">Enable Microphone:</label>
+                 <button id="mic_enable" type="button"
+                    onclick="enable_microphone()">
+                    Enable Microphone
+                 </button>
               </fieldset>
            </form>
         </template>
